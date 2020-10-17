@@ -4,10 +4,24 @@ import Container from './components/Container';
 import './App.css';
 
 function App() {
+  const [Data,setData]=useState([]);
 
-  const [Data,setData]=useState([])
+  const GenerateStarDate=()=>{
+    let date= new Date();
+    date.setDate(date.getDate() - 30);
+    let month = (date.getMonth()+1).toString();
+    let day = date.getDate().toString();
+    if(day.length<2)
+    day="0"+day;
+    if(month.length<2)
+    month="0"+month;
+    const stringDate=date.getFullYear()+"-"+month+"-"+day;
+    console.log("start date",stringDate);
+    return stringDate;
+  }
   const FetchData= async ()=>{
-    return await axios.get("https://api.github.com/search/repositories?q=created:>2017-10-22&sort=stars&order=desc");
+    const startdate=GenerateStarDate();
+    return await axios.get(`https://api.github.com/search/repositories?q=created:>${startdate}&sort=stars&order=desc`);
   }
 
   useEffect(async () => {

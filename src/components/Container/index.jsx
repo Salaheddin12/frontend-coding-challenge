@@ -12,7 +12,7 @@ export default ({repositories}) => {
     return (
        <Wraper>
        {
-        repositories.map((repo)=><Card repository={repo}/>)
+        repositories.map((repo)=><Card key={repo.id} repository={repo}/>)
        }
        </Wraper>
     );

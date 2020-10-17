@@ -12,6 +12,11 @@ export default({repository}) => {
         owner
     }= repository;
     const {login,avatar_url}=owner;
+
+    const GetDateInterval=push_date=>{
+      const dateDiff=new Date(Date.now()-Date.parse(push_date));
+      return Math.ceil(dateDiff / (1000 * 60 * 60 * 24));
+    }
     return (
         <CardWraper as="a" href={html_url} target="_blank" rel="noopener noreferrer">
             <Avatar src={avatar_url} />
@@ -20,7 +25,7 @@ export default({repository}) => {
                 <p>{description?description:"No description, website, or topics provided."}</p>
                 <Badge>Stars: {stargazers_count} </Badge>
                 <Badge>Issues: {open_issues_count}</Badge>
-                <span> submitted by {login} 30 days ago</span>
+                <span> submitted by {login} {GetDateInterval(pushed_at)} days ago</span>
             </Details> 
         </CardWraper> 
     );
