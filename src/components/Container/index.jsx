@@ -8,14 +8,12 @@ export const Wraper=styled.div`
     min-height:100vh;
 `; 
 
-export default () => {
+export default ({repositories}) => {
     return (
        <Wraper>
-            <Card/>
-            <Card/>
-            <Card/>
-            <Card/>
-            <Card/>
+       {
+        repositories.map((repo)=><Card repository={repo}/>)
+       }
        </Wraper>
     );
 } ;
