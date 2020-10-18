@@ -16,14 +16,19 @@ export default({repository}) => {
       const dateDiff=new Date(Date.now()-Date.parse(push_date));
       return Math.ceil(dateDiff / (1000 * 60 * 60 * 24));
     }
+    const Optmize=number=>{
+        if(number>=1000)
+        number=(number/1000).toFixed(1).toString()+"K";
+        return number;
+    }
     return (
         <CardWraper as="a" href={html_url} target="_blank" rel="noopener noreferrer">
             <Avatar src={avatar_url} />
             <Details>
                 <h3>{name}</h3>
                 <p>{description?description:"No description, website, or topics provided."}</p>
-                <Badge>Stars: {stargazers_count} </Badge>
-                <Badge>Issues: {open_issues_count}</Badge>
+                <Badge>Stars: {Optmize(stargazers_count)} </Badge>
+                <Badge>Issues: {Optmize(open_issues_count)}</Badge>
                 <span> submitted by {login} {GetDateInterval(pushed_at)} days ago</span>
             </Details> 
         </CardWraper> 
