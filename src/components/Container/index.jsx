@@ -9,14 +9,8 @@ export const Wraper=styled.div`
     min-height:100vh;
 `; 
 
-export default ({repositories,refValue,onPageChange}) => {
+export default ({repositories,onPageChange}) => {
     
-    const isLastItem=(item)=>{
-        const lastIndex=repositories.length-1;
-        console.log(lastIndex,repositories.indexOf(item));
-        return repositories.indexOf(item)===lastIndex?refValue:null;
-    }
-
     return (
        <Wraper>
         <InfiniteScroll 
@@ -24,7 +18,7 @@ export default ({repositories,refValue,onPageChange}) => {
             next={()=>onPageChange()}
             hasMore={true}>
             {
-             repositories.map((repo)=> <Card refVal={isLastItem(repo)} key={repo.id} repository={repo}/>)
+             repositories.map((repo)=> <Card key={repo.id} repository={repo}/>)
             }
         </InfiniteScroll>
        </Wraper>
