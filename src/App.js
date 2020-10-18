@@ -5,6 +5,7 @@ import './App.css';
 
 function App() {
   const [Data,setData]=useState([]);
+  const [pageIndex,setPageIndex]=useState(1);
 
   const GenerateStarDate=()=>{
     let date= new Date();
@@ -16,20 +17,26 @@ function App() {
     if(month.length<2)
     month="0"+month;
     const stringDate=date.getFullYear()+"-"+month+"-"+day;
-    console.log("start date",stringDate);
     return stringDate;
   }
-  const FetchData= async ()=>{
-    const startdate=GenerateStarDate();
-    return await axios.get(`https://api.github.com/search/repositories?q=created:>${startdate}&sort=stars&order=desc`);
+
+  const Paginate=()=>{
+    setPageIndex(pageIndex+1)
   }
 
-  useEffect(async () => {
-    const {data}=await FetchData();
-      setData(data.items);
-  }, []);
+  const fetchData=async ()=>{
+    const startdate=GenerateStarDate();
+    const API_ENDPOINT=`https://api.github.com/search/repositories?q=created:>${startdate}&sort=stars&order=desc&page=${pageIndex}`;
+    const {data}= await axios.get(API_ENDPOINT);
+    setData([...Data,...data.items]);
+  }
+
+  useEffect(() => {
+    fetchData();
+  }, [pageIndex]);
+  
   return (
-    <Container repositories={Data} className="App"/>
+    <Container onPageChange={Paginate} repositories={Data} className="App"/>
   );
 }
 

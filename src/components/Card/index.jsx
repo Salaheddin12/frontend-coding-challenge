@@ -1,7 +1,6 @@
 import React from 'react';
 import { CardWraper ,Avatar, Details,Badge} from './styles';
-
-export default({repository}) => {
+export default({repository,refVal}) => {
    const  {
         name,
         html_url,
@@ -18,7 +17,7 @@ export default({repository}) => {
       return Math.ceil(dateDiff / (1000 * 60 * 60 * 24));
     }
     return (
-        <CardWraper as="a" href={html_url} target="_blank" rel="noopener noreferrer">
+        <CardWraper ref={refVal} as="a" href={html_url} target="_blank" rel="noopener noreferrer">
             <Avatar src={avatar_url} />
             <Details>
                 <h3>{name}</h3>
