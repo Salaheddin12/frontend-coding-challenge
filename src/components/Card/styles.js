@@ -15,6 +15,7 @@ export const CardWraper = styled.div`
   }
   p {
     color: #707070;
+    padding:10px;
   }
 
 `;
@@ -31,7 +32,7 @@ export const Badge=styled.span`
     background-color:#F7DC6F;
     border-radius:5px;
     padding:5px;
-    margin-right:10px;
+    margin:5px 10px;
 `;
 
   
