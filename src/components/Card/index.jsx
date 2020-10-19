@@ -12,11 +12,11 @@ export default({repository}) => {
     }= repository;
     const {login,avatar_url}=owner;
 
-    const GetDateInterval=push_date=>{
-      const dateDiff=new Date(Date.now()-Date.parse(push_date));
+    const GetDateInterval = push_date=>{
+      const dateDiff = new Date(Date.now() - Date.parse(push_date));
       return Math.ceil(dateDiff / (1000 * 60 * 60 * 24));
     }
-    const Optmize=number=>{
+    const Optmize = number =>{
         if(number>=1000)
         number=(number/1000).toFixed(1).toString()+"K";
         return number;
